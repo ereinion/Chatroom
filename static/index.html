@@ -1,0 +1,113 @@
+<!doctype html>
+ <html ng-app="ISSChatApp">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Space</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <meta name="viewport" content="width=device-width">
+    
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.4.4/socket.io.js"></script>
+    <script src="js/controller.js"></script>
+
+  </head>
+  <body>
+  
+  <div class="container" ng-controller="ChatController">
+  
+    <div class="wrapper" >
+        
+      <div id = "formpane">
+        <header>
+        </header>
+        
+        <h1>Chat</h1>
+        <p>Chat Room</p>
+        
+        <div id = "container">
+        <form ng-submit="changeRoom1()">
+        <input type="submit" class="span1 btn btn-primary" value="Room1 (General Chat)">
+        </form>
+        
+        <form ng-submit="changeRoom2()">
+        <input type="submit" class="span1 btn btn-primary" value="Room2 (Test room)">
+        </form>
+        
+        <form ng-submit="changeRoom3()">
+        <input type="submit" class="span1 btn btn-primary" value="Room3 (Politics)">
+        </form>
+        </div>
+        
+         <div class="scroll" id="msgpane">
+         <p ng-repeat="msg in messages">
+             <b ng-bind="msg.room"></b>:&nbsp;
+         <b ng-bind="msg.name"></b>:&nbsp;
+         <span ng-bind="msg.text"></span>
+         </p>
+         </div>
+          
+        
+         
+           <form ng-submit="submitText()">
+                <input type="text" ng-model="currentText" size="30"  placeholder="..">
+                <input type="submit" value="Send" >
+            </form>
+            
+            </br>
+            
+        <h1>Search</h1>
+        <p>Search past messages</p>
+        <div class="scroll" id="srchpane">
+        <p ng-repeat="sr in searches">
+        <b ng-bind="sr.name"></b>:&nbsp;
+        <span ng-bind="sr.text"></span>
+        </p>
+        </div>
+    
+        <form ng-submit="searchText()">
+        <input type="text" ng-model="searchValue" size="30"  placeholder="Search for">
+        <input type="submit" value="Search" >
+        </form>
+            
+        </div>
+        
+        <div id="loginbox"> 
+        <center><p>Login</p></center> 
+        <form ng-submit="login()">
+        <center>Username:</center>
+        <center><input type="text" ng-model = "username" input id = "username" placeholder="username" size="12" /></center>
+        <center>Password:</center>
+        <center><input type="password" ng-model = "password" input id = "password" size="14" /></center>
+        <center><input type="submit" class="span1 btn btn-primary" value="Login" ng-disabled="!password"></center>
+        </form>
+        </br>
+        </div> 
+        </br>
+        
+        <div id="accountbox"> 
+        <center><p>Create Account</p></center>
+        <form ng-submit="account()">
+        <center><p>Username:</p></center>
+        <center><input type="text" ng-model = "usernamegen" input id = "usernamegen" placeholder="username" size="12" /></center>
+        <center><p>Password:</p></center>
+        <center><input type="password" ng-model = "passwordgen" input id = "passwordgen" size="14" /></center>
+        <center>
+        <input type="checkbox" ng-model = "room2" input id = "room2"> Subscribe to Room 2 <br/>
+        <input type="checkbox" ng-model = "room3" input id = "room2"> Subscribe to Room 3 <br/>
+        </center>
+        <center><input type="submit" class="span1 btn btn-primary" value="Create Account" ng-disabled="!passwordgen"></center>
+        </form>
+        </br>
+        </div> 
+        
+      
+        
+
+    </div>
+    <script src="js/scale.fix.js"></script>
+    </div>
+  </body>
+</html>
